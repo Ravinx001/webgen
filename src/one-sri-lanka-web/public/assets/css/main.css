@@ -1,0 +1,97 @@
+body {
+    background-color: #d0d3db;
+}
+
+.navbar-custom {
+    background-color: #0000ff;
+}
+
+.navbar-custom .navbar-brand {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.top-bar {
+    background-color: #0013ff;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: radial-gradient(circle, blue, red);
+    cursor: pointer;
+}
+
+h2 {
+    font-weight: 700;
+    color: #4a4a4a;
+    margin-bottom: 1.5rem;
+}
+
+.btn-blue {
+    background-color: #0013ff;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    min-width: 200px;
+}
+
+.btn-blue:hover {
+    background-color: #0000cc;
+}
+
+.announcement,
+.scam-alert-light,
+.scam-alert-dark {
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.announcement,
+.scam-alert-light {
+    background-color: #d8bcbc;
+    color: #3b1c1c;
+}
+
+.scam-alert-dark {
+    background-color: #c33c3c;
+    color: white;
+}
+
+.section-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #3d3d3d;
+}
+
+.links .btn-blue {
+    min-width: 180px;
+}
+
+@media (max-width: 576px) {
+    .btn-blue {
+        min-width: 100%;
+        margin-right: 0;
+    }
+
+    .links .btn-blue {
+        min-width: 100%;
+    }
+}

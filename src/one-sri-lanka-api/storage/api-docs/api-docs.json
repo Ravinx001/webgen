@@ -1,0 +1,92 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My API",
+        "description": "This is the API documentation for my Laravel API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/welcome": {
+            "get": {
+                "tags": [
+                    "Sample"
+                ],
+                "summary": "Return a welcome message for the API",
+                "operationId": "64ba514c62ce911599ed8c41cda2cb35",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Welcome to the Sample API Controller!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/echo": {
+            "post": {
+                "tags": [
+                    "Sample"
+                ],
+                "summary": "Echo back the data sent in the request",
+                "operationId": "90cf5590a909f08bf95bc084b439b1d7",
+                "requestBody": {
+                    "description": "JSON payload to echo",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "example": {
+                                "foo": "bar",
+                                "number": 123
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Echoed data with status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "received_data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Sample",
+            "description": "Sample"
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "user/sludi-oauth-php",
+  "autoload": {
+    "psr-4": {
+      "User\\SludiOauthPhp\\": "src/"
+    }
+  },
+  "require": {
+    "firebase/php-jwt": "^6.10"
+  }
+}
