@@ -155,7 +155,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('admin.complaint-category.index') }}" class="nav-link">
                                         Manage Categories
                                     </a>
                                 </li>

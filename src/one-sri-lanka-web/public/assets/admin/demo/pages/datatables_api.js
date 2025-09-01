@@ -1,36 +1,18 @@
-/* ------------------------------------------------------------------------------
- *
- *  # Datatables API
- *
- *  Demo JS code for datatable_api.html page
- *
- * ---------------------------------------------------------------------------- */
-
-
-// Setup module
-// ------------------------------
 
 const DatatableAPI = function() {
 
-
-    //
-    // Setup module components
-    //
-
-    // Basic Datatable examples
     const _componentDatatableAPI = function() {
         if (!$().DataTable) {
             console.warn('Warning - datatables.min.js is not loaded.');
             return;
         }
 
-        // Setting datatable defaults
-        $.extend( $.fn.dataTable.defaults, {
+        $.extend($.fn.dataTable.defaults, {
             autoWidth: false,
             columnDefs: [{ 
                 orderable: false,
                 width: 100,
-                targets: [ 5 ]
+                targets: [5]
             }],
             dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
             language: {
@@ -41,82 +23,73 @@ const DatatableAPI = function() {
             }
         });
 
-
-        // Single row selection
-        const singleSelect = $('.datatable-selection-single').DataTable();
-        $('.datatable-selection-single tbody').on('click', 'tr', function() {
-            if ($(this).hasClass('table-success')) {
-                $(this).removeClass('table-success');
-            }
-            else {
-                singleSelect.$('tr.table-success').removeClass('table-success');
-                $(this).addClass('table-success');
-            }
-        });
-
-
-        // Multiple rows selection
-        $('.datatable-selection-multiple').DataTable();
-        $('.datatable-selection-multiple tbody').on('click', 'tr', function() {
-            $(this).toggleClass('table-success');
-        });
-
-
-        // Individual column searching with text inputs
-        $('.datatable-column-search-inputs thead tr:eq(1) th').not(':last-child').each(function () {
-            const title = $(this).text();
-            $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
-        });
         $('.datatable-column-search-inputs').DataTable({
+            ajax: '/api/complaint-categories', 
+            columns: [
+                { data: 'id' },
+                { data: 'category_name' },
+                { data: 'parent_category', defaultContent: '-' },
+                { data: 'description' },
+                {
+                    data: 'status',
+                    render: function(data, type, row) {
+                        if (data === 'Active') {
+                            return '<span class="badge bg-success bg-opacity-10 text-success">Active</span>';
+                        } else {
+                            return '<span class="badge bg-danger bg-opacity-10 text-danger">Inactive</span>';
+                        }
+                    }
+                },
+                {                                                                                                           
+                    data: null,
+                    orderable: false,
+                    className: 'text-center',
+                    render: function(data, type, row) {
+                        return `
+                        <div class="d-inline-flex">
+                            <div class="dropdown">
+                                <a href="#" class="text-body" data-bs-toggle="dropdown">
+                                    <i class="ph-list"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="/categories/${row.id}" class="dropdown-item">
+                                        <i class="ph-eye me-2"></i>View
+                                    </a>
+                                    <a href="/categories/${row.id}/edit" class="dropdown-item">
+                                        <i class="ph-pencil me-2"></i>Edit
+                                    </a>
+                                    <a href="#" class="dropdown-item text-danger" data-id="${row.id}" onclick="deleteCategory(${row.id})">
+                                        <i class="ph-trash me-2"></i>Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    }
+                }
+            ],
             orderCellsTop: true,
             initComplete: function () {
                 this.api()
                     .columns()
                     .every(function (index) {
-                        const that = this;
-     
-                        $('input').on('keyup change clear', function () {
-                            if (that.search() !== this.value) {
-                                that.column($(this).parent().index() + ':visible').search(this.value).draw();
-                            }
-                        });
+                        if(index < 5) { 
+                            let column = this;
+                            $('input', $('.datatable-column-search-inputs thead tr:eq(1) th').eq(index)).on('keyup change clear', function () {
+                                if (column.search() !== this.value) {
+                                    column.search(this.value).draw();
+                                }
+                            });
+                        }
                     });
             }
         });
 
-
-        // Individual column searching with selects
-        $('.datatable-column-search-selects').DataTable({
-            orderCellsTop: true,
-            initComplete: function () {
-                this.api()
-                    .columns()
-                    .every(function () {
-                        const column = this;
-                        const select = $('<select class="form-select"><option value="0" selected disabled>Filter</option></select>')
-                            .appendTo($('.datatable-column-search-selects thead tr:eq(1) th').not(':last-child').eq(column.index()).empty())
-                            .on('change', function () {
-                                const val = $.fn.dataTable.util.escapeRegex($(this).val());
-     
-                                column.search(val ? '^' + val + '$' : '', true, false).draw();
-                            });
-     
-                        column
-                            .data()
-                            .unique()
-                            .sort()
-                            .each(function (d, j) {
-                                select.append('<option value="'+d.replace(/<(?:.|\n)*?>/gm, '')+'">'+d.replace(/<(?:.|\n)*?>/gm, '')+'</option>')
-                            });
-                    });
-            }
+        $('.datatable-column-search-inputs thead tr:eq(1) th').not(':last-child').each(function () {
+            const title = $(this).text();
+            $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
         });
     };
-
-
-    //
-    // Return objects assigned to module
-    //
 
     return {
         init: function() {
@@ -124,10 +97,6 @@ const DatatableAPI = function() {
         }
     }
 }();
-
-
-// Initialize module
-// ------------------------------
 
 document.addEventListener('DOMContentLoaded', function() {
     DatatableAPI.init();

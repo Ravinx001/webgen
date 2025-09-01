@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\ApiResponseService;
 use App\Services\ComplaintService;
+use App\Services\DataTableService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
         });
         $this->app->singleton('apiresponse', function ($app) {
             return new ApiResponseService();
+        });
+        $this->app->singleton(DataTableService::class, function ($app) {
+            return new DataTableService();
         });
     }
 

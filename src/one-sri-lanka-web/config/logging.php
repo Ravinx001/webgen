@@ -73,6 +73,15 @@ return [
             'replace_placeholders' => true,
         ],
 
+          'api_calls' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/api-calls.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+            'permission' => 0664,
+            'replace_placeholders' => true,
+        ],
+
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),

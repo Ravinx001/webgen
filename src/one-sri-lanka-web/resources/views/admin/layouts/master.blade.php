@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-color-theme="light" >
+<html lang="en" dir="ltr" data-color-theme="light">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,7 @@
     <title>One Sri Lanka</title>
     <link rel="icon" type="image/x-icon" href="{{asset('assets/admin/images/favicon.svg')}}">
 
-   @include('admin.layouts.head-css')
+    @include('admin.layouts.head-css')
 
 </head>
 
@@ -38,7 +39,10 @@
         <!-- /main content -->
 
     </div>
+
     <!-- /page content -->
+
+    @include('admin.layouts.alerts')
 
     <!-- notification -->
     @include('admin.layouts.notification')
@@ -47,4 +51,5 @@
     @include('admin.layouts.right-sidebar')
 
 </body>
+
 </html>

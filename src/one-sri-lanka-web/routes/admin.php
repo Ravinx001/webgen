@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\Admin\CommonComplaintsController;
 use App\Http\Controllers\Admin\ComplaintsCategoryController;
-use App\Http\Controllers\Admin\ComplaintsController;
 use Illuminate\Support\Facades\Route;
-
 
 Route::group([], function () {
 
@@ -20,10 +18,12 @@ Route::group([], function () {
 
     Route::prefix('complaint-category')->name('complaint-category.')->group(function () {
         Route::get('/', [ComplaintsCategoryController::class, 'index'])->name('index');
+        Route::get('/get', [ComplaintsCategoryController::class, 'get'])->name('get');
+        Route::get('/show', [ComplaintsCategoryController::class, 'show'])->name('show');
         Route::get('/create', [ComplaintsCategoryController::class, 'create'])->name('create');
         Route::post('/', [ComplaintsCategoryController::class, 'store'])->name('store');
         Route::get('/{id}/edit', [ComplaintsCategoryController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [ComplaintsCategoryController::class, 'update'])->name('update');
+        Route::post('/{id}/update', [ComplaintsCategoryController::class, 'update'])->name('update');
         Route::delete('/{id}', [ComplaintsCategoryController::class, 'destroy'])->name('destroy');
     });
 });
