@@ -11,7 +11,6 @@ class ComplaintsCategoryController extends Controller
 {
     public function index()
     {
-
         return view('admin.pages.complaints.complaint-category.index', [
             'title' => 'Common Complaints',
             'subtitle' => 'List of Common Complaints',

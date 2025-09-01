@@ -177,7 +177,30 @@
                 <!-- Divider -->
                 <li class="nav-item-divider"></li>
 
-                <!-- Another Section -->
+                <!-- Alerts Section -->
+                <li class="nav-item-header">
+                    <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Alerts</div>
+                    <i class="ph-bell-ringing sidebar-resize-show"></i>
+                </li>
+                <li class="nav-item nav-item-submenu">
+                    <a href="{{ route('admin.alerts.index') }}" class="nav-link">
+                        <i class="ph-warning"></i>
+                        <span>Alerts</span>
+                        <span class="badge bg-danger align-self-center rounded-pill ms-auto">3</span>
+                    </a>
+                    <ul class="nav-group-sub collapse">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.alerts.create') }}" class="nav-link">
+                                Add Alert
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.alerts.index') }}" class="nav-link">
+                                Manage Alerts
+                            </a>
+                        </li>
+                    </ul>
+                </li>                <!-- Another Section -->
                 <li class="nav-item-header">
                     <div class="text-uppercase fs-sm lh-sm opacity-50 sidebar-resize-hide">Tools</div>
                     <i class="ph-dots-three sidebar-resize-show"></i>

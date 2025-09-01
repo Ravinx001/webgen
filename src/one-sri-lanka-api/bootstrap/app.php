@@ -65,8 +65,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
                 // Handle database connection exceptions
                 if ($e instanceof \Illuminate\Database\QueryException) {
-                    $message = app()->environment('production') 
-                        ? 'Database error occurred' 
+                    $message = app()->environment('production')
+                        ? 'Database error occurred'
                         : $e->getMessage();
                     return ApiResponse::error($message, 500);
                 }
@@ -110,7 +110,7 @@ function shouldLogException(Throwable $e): bool
     }
 
     // Don't log auth errors
-    if ($e instanceof \Illuminate\Auth\AuthenticationException || 
+    if ($e instanceof \Illuminate\Auth\AuthenticationException ||
         $e instanceof \Illuminate\Auth\Access\AuthorizationException) {
         return false;
     }
