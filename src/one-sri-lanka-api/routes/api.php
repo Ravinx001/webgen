@@ -1,8 +1,19 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Admin\ComplaintCategoryController;
+use App\Http\Controllers\Api\V1\Admin\AlertController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::prefix('alerts')->name('alerts.')->group(function () {
+    Route::get('/', [AlertController::class, 'index'])->name('index');
+    Route::get('/data', [AlertController::class, 'getData'])->name('data');
+    Route::post('/', [AlertController::class, 'store'])->name('store');
+    Route::get('/{id}', [AlertController::class, 'show'])->whereNumber('id')->name('show');
+    Route::put('/{id}', [AlertController::class, 'update'])->whereNumber('id')->name('update');
+    Route::delete('/{id}', [AlertController::class, 'destroy'])->whereNumber('id')->name('destroy');
+    Route::post('/{id}/toggle-status', [AlertController::class, 'toggleStatus'])->whereNumber('id')->name('toggle-status');
+});
 
 Route::prefix('complaint-category')->name('complaint-category.')->group(function () {
 
