@@ -14,6 +14,7 @@ Route::group([], function () {
     Route::prefix('common-complaints')->name('common-complaints.')->group(function () {
         Route::get('/', [CommonComplaintsController::class, 'index'])->name('index');
         Route::get('/create', [CommonComplaintsController::class, 'create'])->name('create');
+        Route::post('/store', [CommonComplaintsController::class, 'store'])->name('store');
         Route::get('/{id}/edit', [CommonComplaintsController::class, 'edit'])->whereNumber('id')->name('edit');
     });
 
