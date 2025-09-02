@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('user/dashboard', function () {
     return view('user.dashboard');
-});
+})->name('dashboard');
 // Route::get('login', function () {
 //     return view('user.auth.login');
 // })->name('login');
@@ -20,6 +20,14 @@ Route::get('test', [AuthController::class, 'index'])->name('test');
 Route::get('user/profile', function () {
     return view('user.profile');
 })->name('userProfile');
+
+Route::get('user/business-registrations', function () {
+    return view('user.business-registrations');
+})->name('business.registrations');
+
+Route::get('user/food-details', function () {
+    return view('user.food-details');
+})->name('food.details');
 
 
 Route::middleware(['guest'])->group(function () {

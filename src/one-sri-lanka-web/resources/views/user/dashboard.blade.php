@@ -52,8 +52,8 @@
 @section('content')
     <div class="d-flex flex-wrap mb-4">
         <a href="{{ route('action') }}" class="btn btn-blue">Make a Complaint</a>
-        <button class="btn btn-blue">Give a Sugession</button>
-        <button class="btn btn-blue">Leave a Review</button>
+        <button class="btn btn-blue" data-bs-toggle="modal" data-bs-target="#comingSoonModal" data-feature="Give a Suggestion">Give a Suggestion</button>
+        <button class="btn btn-blue" data-bs-toggle="modal" data-bs-target="#comingSoonModal" data-feature="Leave a Review">Leave a Review</button>
     </div>
 
     <div class="section-title">Special Government Announcements (3)</div>
@@ -65,8 +65,8 @@
 
     <div class="section-title">Links</div>
     <div class="d-flex flex-wrap links mb-4">
-        <button class="btn btn-blue me-3 mb-3">Find Business Registrations</button>
-        <button class="btn btn-blue mb-3">Check Food Details</button>
+        <a href="{{ route('business.registrations') }}" class="btn btn-blue me-3 mb-3">Find Business Registrations</a>
+        <a href="{{ route('food.details') }}" class="btn btn-blue mb-3">Check Food Details</a>
     </div>
 
     @php
@@ -161,4 +161,54 @@
             </div>
         </div>
     @endif
+
+    <!-- Coming Soon Modal -->
+    <div class="modal fade" id="comingSoonModal" tabindex="-1" aria-labelledby="comingSoonModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="comingSoonModalLabel">
+                        <i class="fas fa-clock text-primary me-2"></i>
+                        Feature Coming Soon
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <div class="mb-3">
+                        <i class="fas fa-tools fa-4x text-muted"></i>
+                    </div>
+                    <h6 class="mb-3" id="featureName">This Feature</h6>
+                    <p class="text-muted mb-4">
+                        We're working hard to bring you this feature. Stay tuned for updates!
+                    </p>
+                    <div class="alert alert-info border-0" style="background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Coming Soon!</strong> This feature is currently under development.
+                    </div>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        <i class="fas fa-check me-2"></i>Got it!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+    <script>
+        // Update modal content based on which button was clicked
+        document.addEventListener('DOMContentLoaded', function() {
+            const comingSoonModal = document.getElementById('comingSoonModal');
+
+            comingSoonModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const featureName = button.getAttribute('data-feature');
+
+                const modalFeatureName = comingSoonModal.querySelector('#featureName');
+                modalFeatureName.textContent = featureName + ' is Coming Soon!';
+            });
+        });
+    </script>
+    @endpush
 @endsection
