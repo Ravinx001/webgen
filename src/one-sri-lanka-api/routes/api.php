@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Admin\CommonComplaintController;
 use App\Http\Controllers\Api\V1\Admin\ComplaintCategoryController;
 use App\Http\Controllers\Api\V1\Admin\AlertController;
 use Illuminate\Support\Facades\Route;
@@ -53,4 +54,12 @@ Route::prefix('complaint-category')->name('complaint-category.')->group(function
     Route::get('/statistics', [ComplaintCategoryController::class, 'getStatistics'])->name('statistics');
     Route::get('/reports', [ComplaintCategoryController::class, 'getReports'])->name('reports');
     Route::get('/usage-report', [ComplaintCategoryController::class, 'getUsageReport'])->name('usage-report');
+});
+
+
+Route::prefix('common-complaints')->name('common-complaints.')->group(function () {
+    Route::get('/', [CommonComplaintController::class, 'index'])->name('index');
+    Route::get('/create', [CommonComplaintController::class, 'create'])->name('create');
+    Route::post('/', [CommonComplaintController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [CommonComplaintController::class, 'edit'])->whereNumber('id')->name('edit');
 });
